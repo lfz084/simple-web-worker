@@ -1,19 +1,27 @@
 const first = document.querySelector('#number1');
 const result = document.querySelector('.result');
 let worker = [];
+let count = 0;
 if (window.Worker) {
   
   for (let i=0;i<5;i++){
+    console.log(worker[i]);
     worker[i] = new Worker("worker.js");
-    if (worker[i]) {
+    if (typeof(worker[i])=="object") {
       worker[i].onmessage = function(e) {
         console.log(e.data+"-"+i);
+        count = String(e.data).indexOf("Result")>-1?count+1:count;
+        if (count==worker.length){
+          count=0;
+          alert("worker end");
+        }
+      };
+      worker[i].onerror = function(e) {
+        alert("err" + e.data + "-" + i);
+        console.log("err" + e.data + "-" + i);
+        count++;
       };
     }
-    else {
-      worker.length--;
-      break;
-    } 
   }
 	
 	first.onchange = function() {

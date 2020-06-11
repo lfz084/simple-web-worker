@@ -6,7 +6,7 @@ onmessage = function(e) {
   } else {
     const workerResult = 'Result: ' + result;
     //console.log('Worker: Posting message back to main script');
-    for(i=0;i<6;i++){
+    for(i=0;i<2;i++){
       postMessage(i);
       for(j=0;j<100000000;j++){
         
