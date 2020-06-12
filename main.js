@@ -3,6 +3,7 @@ const result = document.querySelector('.result');
 let worker = [];
 let count = 0;
 let errCount = 0;
+
 alert("浏览器支持" +window.navigator.hardwareConcurrency+"线程");
 if (window.Worker) {
   
