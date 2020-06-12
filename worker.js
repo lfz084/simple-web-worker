@@ -7,7 +7,10 @@ onmessage = function(e) {
     const workerResult = 'Result: ' + result;
     //console.log('Worker: Posting message back to main script');
     for(i=0;i<2;i++){
-      postMessage(i);
+      let post=(pm(i))();
+      //console.log(post);
+      post.next();
+      post.next();
       for(j=0;j<100000000;j++){
         
       }
@@ -15,3 +18,11 @@ onmessage = function(e) {
     postMessage(workerResult);
   }
 }
+
+let pm = function(data){
+           let d=data;
+           return function* (){
+                     yield;
+                     postMessage(d);
+                  };
+         };
